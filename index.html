@@ -252,6 +252,302 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/object-detection-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZoeZou">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="走马">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/12/object-detection-api/" itemprop="url">深度学习： 目标检测 Object Detection API</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-12T22:31:15+01:00">
+                2018-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/目标检测model实现/" itemprop="url" rel="index">
+                    <span itemprop="name">目标检测model实现</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/Mobilenet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZoeZou">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="走马">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/12/Mobilenet/" itemprop="url">深度学习论文笔记： MobileNets</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-12T22:20:56+01:00">
+                2018-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction:"></a>Introduction:</h1><p>论文链接：<a href="https://arxiv.org/abs/1704.04861" target="_blank" rel="noopener">https://arxiv.org/abs/1704.04861</a></p>
+<h2 id="Terms-mentioned"><a href="#Terms-mentioned" class="headerlink" title="Terms mentioned:"></a>Terms mentioned:</h2><p><strong>depthwise separable convolution</strong>(factorized convolution)</p>
+<ul>
+<li>depthwise convolution</li>
+<li>pointwise convolution<br><strong>hyper-parameter</strong></li>
+<li>width multiplier</li>
+<li>resolution multiplier</li>
+</ul>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract:"></a>Abstract:</h1><ul>
+<li>MobileNet V1: 通过分解标准卷积网络构造轻量型深度神经网络，其中将标准卷积过程分解为depthwise convolution和pointwise convolution。</li>
+<li>MobileNet模型主要为了实现移动端or嵌入式装置实际应用，主打轻便、高效、迅速。因而在其改良模型上引进两个超参数，a（width multiplier）与p（resolution multiplier）。满足不同场景对对模型的需求。</li>
+<li>深度学习领域里对图像识别实际应用中，模型选择一直处在一个天平架上，要么选择一个平衡点，准确度和延迟相较比较平均，要么选取一个极端，准或者快。MobileNet模型则利用accuracy tradeoff latency。训练出来的模型小，识别快，但准确度没有那么高。</li>
+<li>Google团队提供不同数据集下训练结果的评估标准，显示与其他轻量型神经网络的性能对比，以及在机器学习中各个场景的应用。</li>
+</ul>
+<h1 id="MobileNet-Architecture："><a href="#MobileNet-Architecture：" class="headerlink" title="MobileNet Architecture："></a>MobileNet Architecture：</h1><h2 id="Depthwise-separable-convolution"><a href="#Depthwise-separable-convolution" class="headerlink" title="Depthwise separable convolution"></a>Depthwise separable convolution</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/走马/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1024,7 +1320,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -1035,7 +1331,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分類</span>
                 </a>
               </div>
@@ -1046,7 +1342,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">標籤</span>
                 </a>
               </div>
