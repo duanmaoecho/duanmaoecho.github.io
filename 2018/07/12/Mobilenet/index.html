@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Introduction:论文链接：https://arxiv.org/abs/1704.04861 Terms mentioned:depthwise separable convolution(factorized convolution)  depthwise convolution pointwise convolutionhyper-parameter width multiplier">
+<meta name="description" content="Introduction:论文链接：https://arxiv.org/abs/1704.04861 Terms mentioned:depthwise separable convolution(factorized convolution)  depthwise convolution pointwise convolution  hyper-parameter  width multipli">
 <meta name="keywords" content="深度学习,目标检测,object detection">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习论文笔记： MobileNets">
+<meta property="og:title" content="(更新中)深度学习论文笔记： MobileNets">
 <meta property="og:url" content="http://yoursite.com/2018/07/12/Mobilenet/index.html">
 <meta property="og:site_name" content="走马">
-<meta property="og:description" content="Introduction:论文链接：https://arxiv.org/abs/1704.04861 Terms mentioned:depthwise separable convolution(factorized convolution)  depthwise convolution pointwise convolutionhyper-parameter width multiplier">
+<meta property="og:description" content="Introduction:论文链接：https://arxiv.org/abs/1704.04861 Terms mentioned:depthwise separable convolution(factorized convolution)  depthwise convolution pointwise convolution  hyper-parameter  width multipli">
 <meta property="og:locale" content="zh-hk">
-<meta property="og:updated_time" content="2018-07-14T23:24:39.000Z">
+<meta property="og:updated_time" content="2018-07-15T12:17:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度学习论文笔记： MobileNets">
-<meta name="twitter:description" content="Introduction:论文链接：https://arxiv.org/abs/1704.04861 Terms mentioned:depthwise separable convolution(factorized convolution)  depthwise convolution pointwise convolutionhyper-parameter width multiplier">
+<meta name="twitter:title" content="(更新中)深度学习论文笔记： MobileNets">
+<meta name="twitter:description" content="Introduction:论文链接：https://arxiv.org/abs/1704.04861 Terms mentioned:depthwise separable convolution(factorized convolution)  depthwise convolution pointwise convolution  hyper-parameter  width multipli">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>深度学习论文笔记： MobileNets | 走马</title>
+  <title>(更新中)深度学习论文笔记： MobileNets | 走马</title>
   
 
 
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深度学习论文笔记： MobileNets</h1>
+          <h1 class="post-title" itemprop="name headline">(更新中)深度学习论文笔记： MobileNets</h1>
         
 
         <div class="post-meta">
@@ -346,7 +346,10 @@
 <h2 id="Terms-mentioned"><a href="#Terms-mentioned" class="headerlink" title="Terms mentioned:"></a>Terms mentioned:</h2><p><strong>depthwise separable convolution</strong>(factorized convolution)</p>
 <ul>
 <li>depthwise convolution</li>
-<li>pointwise convolution<br><strong>hyper-parameter</strong></li>
+<li>pointwise convolution</li>
+</ul>
+<p><strong>hyper-parameter</strong></p>
+<ul>
 <li>width multiplier</li>
 <li>resolution multiplier</li>
 </ul>
@@ -354,9 +357,9 @@
 <li>MobileNet V1: 通过分解标准卷积网络构造轻量型深度神经网络，其中将标准卷积过程分解为depthwise convolution和pointwise convolution。</li>
 <li>MobileNet模型主要为了实现移动端or嵌入式装置实际应用，主打轻便、高效、迅速。因而在其改良模型上引进两个超参数，a（width multiplier）与p（resolution multiplier）。满足不同场景对对模型的需求。</li>
 <li>深度学习领域里对图像识别实际应用中，模型选择一直处在一个天平架上，要么选择一个平衡点，准确度和延迟相较比较平均，要么选取一个极端，准或者快。MobileNet模型则利用accuracy tradeoff latency。训练出来的模型小，识别快，但准确度没有那么高。</li>
-<li>Google团队提供不同数据集下训练结果的评估标准，显示与其他轻量型神经网络的性能对比，以及在机器学习中各个场景的应用。</li>
 </ul>
-<h1 id="MobileNet-Architecture："><a href="#MobileNet-Architecture：" class="headerlink" title="MobileNet Architecture："></a>MobileNet Architecture：</h1><h2 id="Depthwise-separable-convolution"><a href="#Depthwise-separable-convolution" class="headerlink" title="Depthwise separable convolution"></a>Depthwise separable convolution</h2>
+<h1 id="MobileNets"><a href="#MobileNets" class="headerlink" title="MobileNets"></a>MobileNets</h1><h2 id="Depthwise-separable-convolution"><a href="#Depthwise-separable-convolution" class="headerlink" title="Depthwise separable convolution"></a>Depthwise separable convolution</h2><p>Depthwise separable convolution将一般标准卷积过程分解为两部分，分别叫做depthwise convolution和pointwise convolution（1X1 convolution)</p>
+
       
     </div>
     
@@ -534,7 +537,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Terms-mentioned"><span class="nav-number">1.1.</span> <span class="nav-text">Terms mentioned:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MobileNet-Architecture："><span class="nav-number">3.</span> <span class="nav-text">MobileNet Architecture：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Depthwise-separable-convolution"><span class="nav-number">3.1.</span> <span class="nav-text">Depthwise separable convolution</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Terms-mentioned"><span class="nav-number">1.1.</span> <span class="nav-text">Terms mentioned:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MobileNets"><span class="nav-number">3.</span> <span class="nav-text">MobileNets</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Depthwise-separable-convolution"><span class="nav-number">3.1.</span> <span class="nav-text">Depthwise separable convolution</span></a></li></ol></li></ol></div>
             
 
           </div>

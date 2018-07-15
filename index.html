@@ -412,7 +412,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/12/Mobilenet/" itemprop="url">深度学习论文笔记： MobileNets</a></h1>
+                <a class="post-title-link" href="/2018/07/12/Mobilenet/" itemprop="url">(更新中)深度学习论文笔记： MobileNets</a></h1>
         
 
         <div class="post-meta">
@@ -490,7 +490,10 @@
 <h2 id="Terms-mentioned"><a href="#Terms-mentioned" class="headerlink" title="Terms mentioned:"></a>Terms mentioned:</h2><p><strong>depthwise separable convolution</strong>(factorized convolution)</p>
 <ul>
 <li>depthwise convolution</li>
-<li>pointwise convolution<br><strong>hyper-parameter</strong></li>
+<li>pointwise convolution</li>
+</ul>
+<p><strong>hyper-parameter</strong></p>
+<ul>
 <li>width multiplier</li>
 <li>resolution multiplier</li>
 </ul>
@@ -498,9 +501,9 @@
 <li>MobileNet V1: 通过分解标准卷积网络构造轻量型深度神经网络，其中将标准卷积过程分解为depthwise convolution和pointwise convolution。</li>
 <li>MobileNet模型主要为了实现移动端or嵌入式装置实际应用，主打轻便、高效、迅速。因而在其改良模型上引进两个超参数，a（width multiplier）与p（resolution multiplier）。满足不同场景对对模型的需求。</li>
 <li>深度学习领域里对图像识别实际应用中，模型选择一直处在一个天平架上，要么选择一个平衡点，准确度和延迟相较比较平均，要么选取一个极端，准或者快。MobileNet模型则利用accuracy tradeoff latency。训练出来的模型小，识别快，但准确度没有那么高。</li>
-<li>Google团队提供不同数据集下训练结果的评估标准，显示与其他轻量型神经网络的性能对比，以及在机器学习中各个场景的应用。</li>
 </ul>
-<h1 id="MobileNet-Architecture："><a href="#MobileNet-Architecture：" class="headerlink" title="MobileNet Architecture："></a>MobileNet Architecture：</h1><h2 id="Depthwise-separable-convolution"><a href="#Depthwise-separable-convolution" class="headerlink" title="Depthwise separable convolution"></a>Depthwise separable convolution</h2>
+<h1 id="MobileNets"><a href="#MobileNets" class="headerlink" title="MobileNets"></a>MobileNets</h1><h2 id="Depthwise-separable-convolution"><a href="#Depthwise-separable-convolution" class="headerlink" title="Depthwise separable convolution"></a>Depthwise separable convolution</h2><p>Depthwise separable convolution将一般标准卷积过程分解为两部分，分别叫做depthwise convolution和pointwise convolution（1X1 convolution)</p>
+
           
         
       
