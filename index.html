@@ -252,6 +252,298 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/object-detection-literature-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZoeZou">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="走马">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/15/object-detection-literature-review/" itemprop="url">基于深度学习下目标检测算法综述</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-15T23:26:38+01:00">
+                2018-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>深度学习主要的应用场景分为三大类：<strong>物体识别、目标检测、自然语言处理</strong>.物体识别领域的核心理念就是CNN（Convolutional Nerual Network）技术，以AlexNet、VGG、Inception、LeNet、ResNet到MobileNet等这一系列以卷积技术为基础的模型框架，实现了人工智能物体识别方向的重要突破，模型效果如准确度、识别时间、模型大小等不同也被应用于不同场合。而目标检测是物体识别(Classification)和物体定位(Localization)的结合体,不仅要识别出物体分类，同时也要定位出物体在图片中的具体位置。<br>目标检测一直是计算机视觉（Computer Vision）的基础问题,在2013年以前目标检测还处于传统手工提取特征的阶段，其主要方法是<strong>区域选择、提取特征、分类回归</strong>三部曲，带来的主要问题是：一是区域选择的策略效果差、时间复杂度高；二是手工提取的特性鲁棒性较差。2014年rbg等学者提出基于卷积神经网络进行特征提取的理念后，以此开辟了新的篇章。<br>本篇综述简要介绍目标检测算法的两大派别及由其衍生的代表性算法。</p>
+<h1 id="两大派系"><a href="#两大派系" class="headerlink" title="两大派系"></a>两大派系</h1><p>基于卷积神经网络的目标检测模型主要分为两大派系，一类是以<strong>R-CNN</strong>为代表的<strong>two-stage</strong>，一类是以<strong>YOLO</strong>为代表的<strong>one-stage</strong>。顾名思义，two-stage意味将物体识别和物体定位分为两步，分别完成。one-stage则是直接对预测的目标物体进行回归。</p>
+<h2 id="Two-stage"><a href="#Two-stage" class="headerlink" title="Two-stage"></a>Two-stage</h2><p>方法：</p>
+<p>1、 生成可能区域(Region Proposal) &amp; CNN提取特征<br>2、 放入分类器（Classifier）并修正位置</p>
+<p>主流算法有R-CNN, fast R-CNN, faster-RCNN等. 优点是识别错误率低，漏识别率也较低，但速度较慢，不能满足real-detection场景。</p>
+<h2 id="One-stage"><a href="#One-stage" class="headerlink" title="One-stage"></a>One-stage</h2><p>如前文所讲，其方法是直接对预测的目标物体进行回归。主流算法有Yolo,SSD,YoloV2等，识别速度快，适用于实时检测，而且准确率基本能达到faster R-CNN的水平，但回归解决问题虽简单快速，就是太过粗暴。</p>
+<p>#R-CNN -&gt; SPP Net -&gt; Fast R-CNN -&gt; Faster R-CNN -&gt; Mask R-CNN</p>
+<p>YOLO<br>SSD/YOLO9000</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/cnn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZoeZou">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="走马">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/15/cnn/" itemprop="url">Andrew Eg Nerual Network基础知识总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-15T21:17:44+01:00">
+                2018-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/神经网络笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">神经网络笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="CNN-convolutional-nerual-network"><a href="#CNN-convolutional-nerual-network" class="headerlink" title="CNN: convolutional nerual network"></a>CNN: convolutional nerual network</h1><p>前馈运算(feed-forward)：卷积(convolution)操作、汇合(pooling)操作和非线性激活函数(non-linear activation function)映射等一系列操作抽取原始数据输入层中的特征值。</p>
+<p>反馈运算：网络最后一层将其目标任务（分类、回归）形式化为目标函数，计算预测值与真实值之间的误差或损失，利用反向传播算法(back-propagation algorithm)将误差与损失由最后一层向前反馈。更新每层参数，并在更新参数后再次向前反馈，直到网络模型收敛，完成模型训练。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/object-detection-api/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1323,7 +1615,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -1334,7 +1626,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分類</span>
                 </a>
               </div>
@@ -1345,7 +1637,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">標籤</span>
                 </a>
               </div>
