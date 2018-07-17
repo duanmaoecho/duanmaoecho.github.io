@@ -345,13 +345,11 @@
       
         
           
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>深度学习主要的应用场景分为三大类：<strong>物体识别、目标检测、自然语言处理</strong>.物体识别领域的核心理念就是CNN（Convolutional Nerual Network）技术，以AlexNet、VGG、Inception、LeNet、ResNet到MobileNet等这一系列以卷积技术为基础的模型框架，实现了人工智能物体识别方向的重要突破，模型效果如准确度、识别时间、模型大小等不同也被应用于不同场合。而目标检测是物体识别(Classification)和物体定位(Localization)的结合体,不仅要识别出物体分类，同时也要定位出物体在图片中的具体位置。<br>目标检测一直是计算机视觉（Computer Vision）的基础问题,在2013年以前目标检测还处于传统手工提取特征的阶段，其主要方法是<strong>区域选择、提取特征、分类回归</strong>三部曲，带来的主要问题是：一是区域选择的策略效果差、时间复杂度高；二是手工提取的特性鲁棒性较差。2014年rbg等学者提出基于卷积神经网络进行特征提取的理念后，以此开辟了新的篇章。<br>本篇综述简要介绍目标检测算法的两大派别及由其衍生的代表性算法。</p>
-<h1 id="两大派系"><a href="#两大派系" class="headerlink" title="两大派系"></a>两大派系</h1><p>基于卷积神经网络的目标检测模型主要分为两大派系，一类是以<strong>R-CNN</strong>为代表的<strong>two-stage</strong>，一类是以<strong>YOLO</strong>为代表的<strong>one-stage</strong>。顾名思义，two-stage意味将物体识别和物体定位分为两步，分别完成。one-stage则是直接对预测的目标物体进行回归。</p>
-<h2 id="Two-stage"><a href="#Two-stage" class="headerlink" title="Two-stage"></a>Two-stage</h2><p>方法：</p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>深度学习主要的应用场景分为三大类：<strong>物体识别、目标检测、自然语言处理</strong>.物体识别领域的核心理念就是CNN（Convolutional Nerual Network）<strong>（卷积-Relu激活－池化Pooling-全连接Fully connected）</strong>技术，以AlexNet、VGG、Inception、LeNet、ResNet到MobileNet等这一系列以卷积技术为基础的模型框架，实现了人工智能物体识别方向的重要突破，模型效果如准确度、识别时间、模型大小等不同也被应用于不同场合。而目标检测是物体识别(Classification)和物体定位(Localization)的结合体,不仅要识别出物体分类，同时也要定位出物体在图片中的具体位置。<br>目标检测一直是计算机视觉（Computer Vision）的基础问题,在2013年以前目标检测还处于传统手工提取特征的阶段，其主要方法是<strong>区域选择、提取特征、分类回归</strong>三部曲，带来的主要问题是：一是区域选择的策略效果差、时间复杂度高；二是手工提取的特性鲁棒性较差。2014年rbg等学者提出基于卷积神经网络进行特征提取的理念后，以此开辟了新的篇章。<br>本篇综述简要介绍目标检测算法的两大派别及由其衍生的代表性算法。</p>
+<h1 id="两大派系"><a href="#两大派系" class="headerlink" title="两大派系"></a>两大派系</h1><p>基于卷积神经网络的目标检测模型主要分为两大派系，一类是以<strong>R-CNN</strong>为代表的<strong>two-stage</strong>，一类是以<strong>YOLO</strong>为代表的<strong>one-stage</strong>。顾名思义，two-stage意味将物体识别和物体定位分为两步，分别完成。one-stage则是直接对预测的目标物体进行回归。<br><strong>Two-stage</strong><br>方法：</p>
 <p>1、 生成可能区域(Region Proposal) &amp; CNN提取特征<br>2、 放入分类器（Classifier）并修正位置</p>
-<p>主流算法有R-CNN, fast R-CNN, faster-RCNN等. 优点是识别错误率低，漏识别率也较低，但速度较慢，不能满足real-detection场景。</p>
-<h2 id="One-stage"><a href="#One-stage" class="headerlink" title="One-stage"></a>One-stage</h2><p>如前文所讲，其方法是直接对预测的目标物体进行回归。主流算法有Yolo,SSD,YoloV2等，识别速度快，适用于实时检测，而且准确率基本能达到faster R-CNN的水平，但回归解决问题虽简单快速，就是太过粗暴。</p>
-<h1 id="Two-stage-R-CNN"><a href="#Two-stage-R-CNN" class="headerlink" title="Two-stage:R-CNN"></a>Two-stage:R-CNN</h1><p>由2014年R-CNN模型提出，其后续算法发展顺序如下：</p>
+<p>主流算法有R-CNN, fast R-CNN, faster-RCNN等. 优点是识别错误率低，漏识别率也较低，但速度较慢，不能满足real-detection场景。<br><strong>One-stage</strong><br>如前文所讲，其方法是直接对预测的目标物体进行回归。主流算法有Yolo,SSD,YoloV2等，识别速度快，适用于实时检测，而且准确率基本能达到faster R-CNN的水平，但回归解决问题虽简单快速，就是太过粗暴。</p>
+<h1 id="Two-stage-R-CNN"><a href="#Two-stage-R-CNN" class="headerlink" title="Two-stage: R-CNN"></a>Two-stage: R-CNN</h1><p>2014年R-CNN模型提出后，其后续算法发展顺序如下：</p>
 <blockquote>
 <p>R-CNN -&gt; SPP Net -&gt; Fast R-CNN -&gt; Faster R-CNN -&gt; Mask R-CNN</p>
 </blockquote>
@@ -359,10 +357,10 @@
 <p>论文链接：<a href="https://arxiv.org/abs/1311.2524" target="_blank" rel="noopener">https://arxiv.org/abs/1311.2524</a></p>
 </blockquote>
 <h3 id="算法结构："><a href="#算法结构：" class="headerlink" title="算法结构："></a>算法结构：</h3><img src="/2018/07/15/object-detection-literature-review/rcnn.png" title="R-CNN：Regions with CNN features">
-<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><p>1、 Input Image<br>2、 利用Selective search算法评估相邻图像之间的相似度，把相似度高的进行合并且对其打分，选出检测物体区域的候选框，被称作子图（约2000个）<br>3、 对每一个子图进行卷积神经网络提取特征<br>4、 提取后的特征进行物体分类，保留分类准确率高的区块作为最终物体定位区块</p>
+<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><p>1、 Input Image<br>2、 利用Selective search算法评估相邻图像之间的相似度，把相似度高的进行合并且对其打分，选出检测物体区域的候选框，被称作子图（约2000个）<br>3、 对每一个子图进行卷积神经网络CNN提取特征<br>4、 提取后的特征输入到SVM分类器，进行物体分类，保留分类准确率高的区块作为最终物体定位区块<br>5、 以回归的方式精修候选框</p>
 <h4 id="突破"><a href="#突破" class="headerlink" title="突破"></a>突破</h4><ul>
 <li>传统的区域选择使用滑窗，每滑一个窗口检测一次，相邻窗口信息重叠高，检测速度慢。R-CNN使用一个启发式方法（Selective search），先生成<strong>候选区域再检测，降低信息冗余程度</strong>，从而提高检测速度。</li>
-<li>传统的手工提取特征鲁棒性差，受限于如颜色、纹理等 低层次（Low level）的特征。使用CNN<strong>（卷积-Relu激活－池化Pooling-全连接Fully connected）</strong>提取特征，可以提取更高层面的抽象特征，从而提高特征的鲁棒性。</li>
+<li>传统的手工提取特征鲁棒性差，受限于如颜色、纹理等 低层次（Low level）的特征。使用CNN提取特征，可以提取更高层面的抽象特征，从而提高特征的鲁棒性。</li>
 </ul>
 <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
 <li>相较现在，生成候选框的算法(Selective search)速度较慢</li>
@@ -372,8 +370,7 @@
 <h2 id="SPP-Net-2014"><a href="#SPP-Net-2014" class="headerlink" title="SPP Net/2014"></a>SPP Net/2014</h2><blockquote>
 <p>论文链接：<a href="https://arxiv.org/abs/1406.4729" target="_blank" rel="noopener">https://arxiv.org/abs/1406.4729</a></p>
 </blockquote>
-<p>#R-CNN -&gt; SPP Net -&gt; Fast R-CNN -&gt; Faster R-CNN -&gt; Mask R-CNN</p>
-<p>YOLO<br>SSD/YOLO9000</p>
+<p>#### </p>
 
           
         
