@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/15/object-detection-literature-review/sppnet_crop_warp.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/15/object-detection-literature-review/sppnet_pool_layer.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/15/object-detection-literature-review/sppnet.png">
-<meta property="og:updated_time" content="2018-07-20T23:38:38.000Z">
+<meta property="og:updated_time" content="2018-07-20T23:43:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于深度学习下目标检测算法综述">
 <meta name="twitter:description" content="前言深度学习主要的应用场景分为三大类：物体识别、目标检测、自然语言处理.物体识别领域的核心理念就是CNN（Convolutional Nerual Network）（卷积-Relu激活－池化Pooling-全连接Fully connected）技术，以AlexNet、VGG、Inception、LeNet、ResNet到MobileNet等这一系列以卷积技术为基础的模型框架，实现了人工智能物体识别">
@@ -380,13 +380,15 @@
 </li>
 <li><p><strong>引进金字塔池化层</strong><br>我们先来看一张对比图：</p>
 <img src="/2018/07/15/object-detection-literature-review/vs.png" title="CNN vs SPP">
+<p>以及两种算法结构图（R-CNN &amp; SPP Net）</p>
+<img src="/2018/07/15/object-detection-literature-review/sppnet_crop_warp.png" title="R-CNN & SPP Net">
 </li>
 </ul>
-<p>以及两种算法结构图（R-CNN &amp; SPP Net）<br><img src="/2018/07/15/object-detection-literature-review/sppnet_crop_warp.png" title="R-CNN & SPP Net"></p>
 <p>首先，我们需要一点预备知识。</p>
 <blockquote>
-<p>卷积神经网络中的卷积层（conv layer）参数与输入图片大小并无关系，仅仅是利用卷积核（conv kernel）在图像上滑动，将不同大小的图片卷积出不同大小的特征图。但全连接层（Fully Connected layer）参数与输入图像大小有关，需要规定输入feature map大小。<br>那么R-CNN是怎么做的呢？<br>在第二张图R-CNN算法结构中可见，进行CNN操作前，对生成的候选区域进行裁剪（Crop）和缩放（Wrap）到固定大小，这样就保证了每一张子图大小相同，卷积后生成的特征图也大小一样，从而全连接层输入神经元个数保持一致。但事实上，从图二中的汽车和象牙塔，可以发现，对图片进行裁剪或缩放，都会很大程度上丢失图片原有信息，例如：将汽车裁剪成只有一个门；象牙塔缩放后图片失真，都造成了原生图片的信息缺失，造成训练效果变差。</p>
+<p>卷积神经网络中的卷积层（conv layer）参数与输入图片大小并无关系，仅仅是利用卷积核（conv kernel）在图像上滑动，将不同大小的图片卷积出不同大小的特征图。但全连接层（Fully Connected layer）参数与输入图像大小有关，需要规定输入feature map大小。</p>
 </blockquote>
+<p>那么R-CNN是怎么做的呢？<br>在第二张图R-CNN算法结构中可见，进行CNN操作前，对生成的候选区域进行裁剪（Crop）和缩放（Wrap）到固定大小，这样就保证了每一张子图大小相同，卷积后生成的特征图也大小一样，从而全连接层输入神经元个数保持一致。但事实上，从图二中的汽车和象牙塔，可以发现，对图片进行裁剪或缩放，都会很大程度上丢失图片原有信息，例如：将汽车裁剪成只有一个门；象牙塔缩放后图片失真，都造成了原生图片的信息缺失，造成训练效果变差。</p>
 <p>而SPP Net则保留原有图像，在卷积层后引进空间金字塔池化层(spatial pyramid pooling)。<br><img src="/2018/07/15/object-detection-literature-review/sppnet_pool_layer.png" title="spatial pyramid pooling"><br>所谓金字塔池化层就是将不同尺寸图片在卷积后形成的任意维度feature maps通过不同大小的区块提取特征，拼凑组合成固定size维度输出，作为fully connected layer的输入层。<br>举个例子，假设我们需要全连接层的输入神经元维度是21x256，上图中黑色模块为卷积层后的feature maps，在SPP Net算法中则利用不同尺寸的区块对特征图分割提取特征，如图中蓝色区块有16格每一层提取16个特征，输出向量维度为16x256，绿色区块为4x256，灰色区块为1x256，通过三个大小不同的区块提取叠加，最后得到16x256+4x256+1x256 = 21x256的固定输入维度，这也就保证了全连接层的输入维度仍旧不变。</p>
 <h3 id="算法结构-1"><a href="#算法结构-1" class="headerlink" title="算法结构"></a>算法结构</h3><p>了解SPP Net的核心改进部分，再对整体算法结构和流程做一个简单回顾。<br><img src="/2018/07/15/object-detection-literature-review/sppnet.png" title="算法结构"></p>
 <h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>基于R-CNN算法<br>1、 利用选择性算法（EdgeBoxes）生成候选区域（约2000个候选窗口）<br>2、 对全图进行CNN提取特征图，然后在feature maps找到各个候选框的区域采用金字塔池化，提取固定尺寸的特征向量。<br>3、 将候选区域特征输入到SVM分类器，判别输入类别<br>4、 以回归的方式精修候选框</p>
