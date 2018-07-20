@@ -88,7 +88,8 @@
 <meta property="og:description" content="前言深度学习主要的应用场景分为三大类：物体识别、目标检测、自然语言处理.物体识别领域的核心理念就是CNN（Convolutional Nerual Network）（卷积-Relu激活－池化Pooling-全连接Fully connected）技术，以AlexNet、VGG、Inception、LeNet、ResNet到MobileNet等这一系列以卷积技术为基础的模型框架，实现了人工智能物体识别">
 <meta property="og:locale" content="zh-hk">
 <meta property="og:image" content="http://yoursite.com/2018/07/15/object-detection-literature-review/rcnn.png">
-<meta property="og:updated_time" content="2018-07-17T21:44:27.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/15/object-detection-literature-review/sppnet_crop_warp.png">
+<meta property="og:updated_time" content="2018-07-20T20:28:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于深度学习下目标检测算法综述">
 <meta name="twitter:description" content="前言深度学习主要的应用场景分为三大类：物体识别、目标检测、自然语言处理.物体识别领域的核心理念就是CNN（Convolutional Nerual Network）（卷积-Relu激活－池化Pooling-全连接Fully connected）技术，以AlexNet、VGG、Inception、LeNet、ResNet到MobileNet等这一系列以卷积技术为基础的模型框架，实现了人工智能物体识别">
@@ -345,9 +346,10 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>深度学习主要的应用场景分为三大类：<strong>物体识别、目标检测、自然语言处理</strong>.物体识别领域的核心理念就是CNN（Convolutional Nerual Network）<strong>（卷积-Relu激活－池化Pooling-全连接Fully connected）</strong>技术，以AlexNet、VGG、Inception、LeNet、ResNet到MobileNet等这一系列以卷积技术为基础的模型框架，实现了人工智能物体识别方向的重要突破，模型效果如准确度、识别时间、模型大小等不同也被应用于不同场合。而目标检测是物体识别(Classification)和物体定位(Localization)的结合体,不仅要识别出物体分类，同时也要定位出物体在图片中的具体位置。<br>目标检测一直是计算机视觉（Computer Vision）的基础问题,在2013年以前目标检测还处于传统手工提取特征的阶段，其主要方法是<strong>区域选择、提取特征、分类回归</strong>三部曲，带来的主要问题是：一是区域选择的策略效果差、时间复杂度高；二是手工提取的特性鲁棒性较差。2014年rbg等学者提出基于卷积神经网络进行特征提取的理念后，以此开辟了新的篇章。<br>本篇综述简要介绍目标检测算法的两大派别及由其衍生的代表性算法。</p>
-<h1 id="两大派系"><a href="#两大派系" class="headerlink" title="两大派系"></a>两大派系</h1><p>基于卷积神经网络的目标检测模型主要分为两大派系，一类是以<strong>R-CNN</strong>为代表的<strong>two-stage</strong>，一类是以<strong>YOLO</strong>为代表的<strong>one-stage</strong>。顾名思义，two-stage意味将物体识别和物体定位分为两步，分别完成。one-stage则是直接对预测的目标物体进行回归。<br><strong>Two-stage</strong><br>方法：</p>
-<p>1、 生成可能区域(Region Proposal) &amp; CNN提取特征<br>2、 放入分类器（Classifier）并修正位置</p>
-<p>主流算法有R-CNN, fast R-CNN, faster-RCNN等. 优点是识别错误率低，漏识别率也较低，但速度较慢，不能满足real-detection场景。<br><strong>One-stage</strong><br>如前文所讲，其方法是直接对预测的目标物体进行回归。主流算法有Yolo,SSD,YoloV2等，识别速度快，适用于实时检测，而且准确率基本能达到faster R-CNN的水平，但回归解决问题虽简单快速，就是太过粗暴。</p>
+<h1 id="两大派系"><a href="#两大派系" class="headerlink" title="两大派系"></a>两大派系</h1><p>基于卷积神经网络的目标检测模型主要分为两大派系，一类是以<strong>R-CNN</strong>为代表的<strong>two-stage</strong>，一类是以<strong>YOLO</strong>为代表的<strong>one-stage</strong>。顾名思义，two-stage意味将物体识别和物体定位分为两步，分别完成。one-stage则是直接对预测的目标物体进行回归。</p>
+<p><strong>Two-stage</strong><br>方法：<br>1、 生成可能区域(Region Proposal) &amp; CNN提取特征<br>2、 放入分类器（Classifier）并修正位置</p>
+<p>主流算法有R-CNN, fast R-CNN, faster-RCNN等. 优点是识别错误率低，漏识别率也较低，但速度较慢，不能满足real-detection场景。</p>
+<p><strong>One-stage</strong><br>如前文所讲，其方法是直接对预测的目标物体进行回归。主流算法有Yolo,SSD,YoloV2等，识别速度快，适用于实时检测，而且准确率基本能达到faster R-CNN的水平，但回归解决问题虽简单快速，就是太过粗暴。</p>
 <h1 id="Two-stage-R-CNN"><a href="#Two-stage-R-CNN" class="headerlink" title="Two-stage: R-CNN"></a>Two-stage: R-CNN</h1><p>2014年R-CNN模型提出后，其后续算法发展顺序如下：</p>
 <blockquote>
 <p>R-CNN -&gt; SPP Net -&gt; Fast R-CNN -&gt; Faster R-CNN -&gt; Mask R-CNN</p>
@@ -356,20 +358,30 @@
 <p>论文链接：<a href="https://arxiv.org/abs/1311.2524" target="_blank" rel="noopener">https://arxiv.org/abs/1311.2524</a></p>
 </blockquote>
 <h3 id="算法结构："><a href="#算法结构：" class="headerlink" title="算法结构："></a>算法结构：</h3><img src="/2018/07/15/object-detection-literature-review/rcnn.png" title="R-CNN：Regions with CNN features">
-<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><p>1、 Input Image<br>2、 利用Selective search算法评估相邻图像之间的相似度，把相似度高的进行合并且对其打分，选出检测物体区域的候选框，被称作子图（约2000个）<br>3、 对每一个子图进行卷积神经网络CNN提取特征<br>4、 提取后的特征输入到SVM分类器，进行物体分类，保留分类准确率高的区块作为最终物体定位区块<br>5、 以回归的方式精修候选框</p>
+<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><p>1、 Input Image<br>2、 利用Selective search算法评估相邻图像之间的相似度，把相似度高的进行合并且对其打分，选出检测物体区域的候选框，被称作子图（约2000个）<br>3、将这2k个候选窗口图片都缩放到固定大小（227x227）,然后对每一个子图进行卷积神经网络CNN提取特征<br>4、 提取后的特征输入到SVM分类器，进行物体分类，保留分类准确率高的区块作为最终物体定位区块<br>5、 以回归的方式精修候选框</p>
 <h4 id="突破"><a href="#突破" class="headerlink" title="突破"></a>突破</h4><ul>
 <li>传统的区域选择使用滑窗，每滑一个窗口检测一次，相邻窗口信息重叠高，检测速度慢。R-CNN使用一个启发式方法（Selective search），先生成<strong>候选区域再检测，降低信息冗余程度</strong>，从而提高检测速度。</li>
-<li>传统的手工提取特征鲁棒性差，受限于如颜色、纹理等 低层次（Low level）的特征。使用CNN提取特征，可以提取更高层面的抽象特征，从而提高特征的鲁棒性。</li>
+<li>传统的手工提取特征鲁棒性差，受限于如颜色、纹理等<strong>低层次（Low level</strong>的特征。使用CNN提取特征，可以提取更高层面的抽象特征，从而提高特征的鲁棒性。</li>
 </ul>
 <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
-<li>相较现在，生成候选框的算法(Selective search)速度较慢</li>
-<li>对于所生成的大量候选框均需要做卷积网络计算，运算量太大，内存占用量大</li>
+<li>与传统相比，减少了大量的运算，但相较现在，生成候选框的算法(Selective search)仍旧有大量的算力冗余</li>
+<li>对于所生成的候选框，不同区域间会有大量重叠，且均需要做卷积网络计算，导致运算浪费且庞大，内存占用量大</li>
 </ul>
 <p>总结： 相较传统的目标检测算法，其准确率获得了量级提升。以VGG-16为物体识别模型，在Pascal Voc2007数据集上达到了66%的准确率，也是Two-stage算法的开山之作。</p>
 <h2 id="SPP-Net-2014"><a href="#SPP-Net-2014" class="headerlink" title="SPP Net/2014"></a>SPP Net/2014</h2><blockquote>
 <p>论文链接：<a href="https://arxiv.org/abs/1406.4729" target="_blank" rel="noopener">https://arxiv.org/abs/1406.4729</a></p>
 </blockquote>
-<p>#### </p>
+<h4 id="改进："><a href="#改进：" class="headerlink" title="改进："></a>改进：</h4><p>与传统目标检测算法相比，R-CNN已经有非常大的突破，但是仍旧存在可以改进的地方，2014年以何恺明、任少卿为首的团队提出了SPP Net，主要对R-CNN算法提出了两处改进：</p>
+<ul>
+<li><p><strong>顺序改变：先卷积后生成区域</strong><br>由上文R-CNN简略介绍中可知，其算法是先生成候选区域、后进行卷积运算。造成的问题是：候选区域会有重叠，卷积运算出现重复浪费，与此同时每个区域进行新的卷积时都需要新的存储空间。<br>SPP Net在此基础上进行优化，将原先顺序改成先卷积后生成区域。意思是：不需要对2k＋的子图逐一进行CNN，而是对整张带检测的图片进行CNN操作，一次性提取特征，得到feature maps。这样不仅减少存储量而且加快了训练速度。</p>
+</li>
+<li><p><strong>引进金字塔池化层</strong><br>我们先来看一张对比图：</p>
+
+</li>
+</ul>
+<p>以及两种算法结构图（R-CNN &amp; SPP Net）<br><img src="/2018/07/15/object-detection-literature-review/sppnet_crop_warp.png" title="R-CNN & SPP Net"></p>
+<p>首先，我们需要一点预备知识。<br>卷积神经网络中的卷积层（conv layer）参数与输入图片大小并无关系，仅仅是利用卷积核（conv kernel）在图像上滑动，将不同大小的图片卷积出不同大小的特征图。但全连接层（Fully Connected layer）参数与输入图像大小有关，需要规定输入feature map大小。<br>那么R-CNN是怎么做的呢？<br>在第二张图R-CNN算法结构中可见，进行CNN操作前，对生成的候选区域进行裁剪（Crop）和缩放（Wrap）到固定大小，这样就保证了每一张子图大小相同，卷积后生成的特征图也大小一样，从而全连接层输入神经元个数保持一致。但事实上，从图二中的汽车和象牙塔，可以发现，对图片进行裁剪或缩放，都会很大程度上丢失图片原有信息，例如：将汽车裁剪成只有一个门；象牙塔缩放后图片失真，都造成了原生图片的信息缺失，造成训练效果变差。</p>
+<p>而SPP Net则</p>
 
       
     </div>
@@ -544,7 +556,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两大派系"><span class="nav-number">2.</span> <span class="nav-text">两大派系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Two-stage-R-CNN"><span class="nav-number">3.</span> <span class="nav-text">Two-stage: R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#R-CNN-2013"><span class="nav-number">3.1.</span> <span class="nav-text">R-CNN/2013</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法结构："><span class="nav-number">3.1.1.</span> <span class="nav-text">算法结构：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#流程"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#突破"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">突破</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPP-Net-2014"><span class="nav-number">3.2.</span> <span class="nav-text">SPP Net/2014</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两大派系"><span class="nav-number">2.</span> <span class="nav-text">两大派系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Two-stage-R-CNN"><span class="nav-number">3.</span> <span class="nav-text">Two-stage: R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#R-CNN-2013"><span class="nav-number">3.1.</span> <span class="nav-text">R-CNN/2013</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法结构："><span class="nav-number">3.1.1.</span> <span class="nav-text">算法结构：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#流程"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#突破"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">突破</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPP-Net-2014"><span class="nav-number">3.2.</span> <span class="nav-text">SPP Net/2014</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#改进："><span class="nav-number">3.2.0.1.</span> <span class="nav-text">改进：</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
