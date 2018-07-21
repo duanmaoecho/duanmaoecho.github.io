@@ -386,11 +386,37 @@
 <p>卷积神经网络中的卷积层（conv layer）参数与输入图片大小并无关系，仅仅是利用卷积核（conv kernel）在图像上滑动，将不同大小的图片卷积出不同大小的特征图。但全连接层（Fully Connected layer）参数与输入图像大小有关，需要规定输入feature map大小。</p>
 </blockquote>
 <p>那么R-CNN是怎么做的呢？<br>在第二张图R-CNN算法结构中可见，进行CNN操作前，对生成的候选区域进行裁剪（Crop）和缩放（Wrap）到固定大小，这样就保证了每一张子图大小相同，卷积后生成的特征图也大小一样，从而全连接层输入神经元个数保持一致。但事实上，从图二中的汽车和象牙塔，可以发现，对图片进行裁剪或缩放，都会很大程度上丢失图片原有信息，例如：将汽车裁剪成只有一个门；象牙塔缩放后图片失真，都造成了原生图片的信息缺失，造成训练效果变差。</p>
-<p>而SPP Net则保留原有图像，在卷积层后引进空间金字塔池化层(spatial pyramid pooling)。<br><img src="/2018/07/15/object-detection-literature-review/sppnet_pool_layer.png" title="spatial pyramid pooling"><br>所谓金字塔池化层就是将不同尺寸图片在卷积后形成的任意维度feature maps通过不同大小的区块提取特征，拼凑组合成固定size维度输出，作为fully connected layer的输入层。<br>举个例子，假设我们需要全连接层的输入神经元维度是21x256，上图中黑色模块为卷积层后的feature maps，在SPP Net算法中则利用不同尺寸的区块对特征图分割提取特征，如图中蓝色区块有16格每一层提取16个特征，输出向量维度为16x256，绿色区块为4x256，灰色区块为1x256，通过三个大小不同的区块提取叠加，最后得到16x256+4x256+1x256 = 21x256的固定输入维度，这也就保证了全连接层的输入维度仍旧不变。</p>
-<h3 id="算法结构-1"><a href="#算法结构-1" class="headerlink" title="算法结构"></a>算法结构</h3><p>了解SPP Net的核心改进部分，再对整体算法结构和流程做一个简单回顾。<br><img src="/2018/07/15/object-detection-literature-review/sppnet.png" title="算法结构"></p>
-<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>基于R-CNN算法<br>1、 利用选择性算法（EdgeBoxes）生成候选区域（约2000个候选窗口）<br>2、 对全图进行CNN提取特征图，然后在feature maps找到各个候选框的区域采用金字塔池化，提取固定尺寸的特征向量。<br>3、 将候选区域特征输入到SVM分类器，判别输入类别<br>4、 以回归的方式精修候选框</p>
+<p>而SPP Net则保留原有图像，在卷积层后引进空间金字塔池化层(spatial pyramid pooling)。</p>
+<img src="/2018/07/15/object-detection-literature-review/sppnet_pool_layer.png" title="spatial pyramid pooling">
+<p>所谓金字塔池化层就是将不同尺寸图片在卷积后形成的任意维度feature maps通过不同大小的区块提取特征，拼凑组合成固定size维度输出，作为fully connected layer的输入层。<br>举个例子，假设我们需要全连接层的输入神经元维度是21x256，上图中黑色模块为卷积层后的feature maps，在SPP Net算法中则利用不同尺寸的区块对特征图分割提取特征，如图中蓝色区块有16格每一层提取16个特征，输出向量维度为16x256，绿色区块为4x256，灰色区块为1x256，通过三个大小不同的区块提取叠加，最后得到16x256+4x256+1x256 = 21x256的固定输入维度，这也就保证了全连接层的输入维度仍旧不变。</p>
+<h3 id="算法结构-1"><a href="#算法结构-1" class="headerlink" title="算法结构"></a>算法结构</h3><p>了解SPP Net的核心改进部分，再对整体算法结构和流程做一个简单回顾。</p>
+<img src="/2018/07/15/object-detection-literature-review/sppnet.png" title="算法结构">
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>1、 利用选择性算法（EdgeBoxes）生成候选区域（约2000个候选窗口）<br>2、 对全图进行CNN提取特征图，然后在feature maps找到各个候选框的区域采用金字塔池化，提取固定尺寸的特征向量。<br>3、 将候选区域特征输入到SVM分类器，判别输入类别<br>4、 以回归的方式精修候选框</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>SPP Net改变了卷积顺序，保留了原生图片信息的完整性，减少了冗余的计算量，大大提高了对图片处理的速度。同时引进了金字塔空间池化，实现多尺度特征提取出固定大小的特征向量，无需固定卷积层输入图像尺寸，保留了原图像更多特征。</p>
-<h2 id="Fast-R-CNN-2015"><a href="#Fast-R-CNN-2015" class="headerlink" title="Fast R-CNN/2015"></a>Fast R-CNN/2015</h2>
+<h2 id="Fast-R-CNN-2015"><a href="#Fast-R-CNN-2015" class="headerlink" title="Fast R-CNN/2015"></a>Fast R-CNN/2015</h2><blockquote>
+<p>论文链接：<a href="https://arxiv.org/abs/1504.08083" target="_blank" rel="noopener">https://arxiv.org/abs/1504.08083</a></p>
+</blockquote>
+<h3 id="算法结构-2"><a href="#算法结构-2" class="headerlink" title="算法结构"></a>算法结构</h3>
+<h3 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h3><p>同样是R-CNN团队结合了原算法与SPP Net提出了更为优良的改进算法Fast R-CNN, 最大的优势是快，训练时间从84小时减少到9.5小时，测试时间从47s降到0.32s，不过准确度相差无几。<br>由算法结构图中我们可以发现其是在SPP-Net结构基础上做出两处改进</p>
+<ul>
+<li><strong>引进ROI(region of interest) Pooling</strong><br>将原有的金字塔池化层改良成ROI Pooling，这样做的优势既不限制输入图片大小，同时也可以反向传播。（金字塔池化层含有多个不同尺寸的区块，无法进行反向传播）<br>而ROI Pooling对卷积层后的特征图进行MaxPooling操作，接下来我们举个例子简单介绍一下。<br>假设我们需要对一个8x8feature maps执行ROI Pooling，要求输出尺寸维度为2x2。</li>
+</ul>
+
+<p>其次候选区域region proposal的大小为7＊5，在特征图中的(左上角、右下角)坐标是(0,3),(6,7)。如图：</p>
+
+<p>由于输出维度大小是2＊2，所以对候选区域进行2＊2分割</p>
+
+<p>最后对分割后的4个网格中取最大值，组成2＊2最大值输出特征图</p>
+
+<p>以上即是ROI Pooling对特征图的操作流程。反向传播和 MaxPooling 层的一样，只对网格里的最大值进行传播。</p>
+<ul>
+<li><strong>多任务同时训练</strong><br>其一是将R-CNN分类器SVM换成softmax，使用神经网络预测分类，减少跨平台损耗，提高预测速度。其二在预测分类、精修回归这一块改成并行任务，将分类损失和边框定位回归损失结合一起统一训练，最终输出对应分类和边框坐标。</li>
+</ul>
+<img src="/2018/07/15/object-detection-literature-review/fast_rcnn.png" title="多任务训练">
+<h2 id="Faster-R-CNN-2015"><a href="#Faster-R-CNN-2015" class="headerlink" title="Faster R-CNN/2015"></a>Faster R-CNN/2015</h2><blockquote>
+<p>论文链接：<a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">https://arxiv.org/abs/1506.01497</a></p>
+</blockquote>
+
           
         
       
