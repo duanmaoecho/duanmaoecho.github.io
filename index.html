@@ -396,18 +396,18 @@
 <h2 id="Fast-R-CNN-2015"><a href="#Fast-R-CNN-2015" class="headerlink" title="Fast R-CNN/2015"></a>Fast R-CNN/2015</h2><blockquote>
 <p>论文链接：<a href="https://arxiv.org/abs/1504.08083" target="_blank" rel="noopener">https://arxiv.org/abs/1504.08083</a></p>
 </blockquote>
-<h3 id="算法结构-2"><a href="#算法结构-2" class="headerlink" title="算法结构"></a>算法结构</h3>
+<h3 id="算法结构-2"><a href="#算法结构-2" class="headerlink" title="算法结构"></a>算法结构</h3><img src="/2018/07/15/object-detection-literature-review/fast_rcnn_sturct.jpg" title="算法结构">
 <h3 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h3><p>同样是R-CNN团队结合了原算法与SPP Net提出了更为优良的改进算法Fast R-CNN, 最大的优势是快，训练时间从84小时减少到9.5小时，测试时间从47s降到0.32s，不过准确度相差无几。<br>由算法结构图中我们可以发现其是在SPP-Net结构基础上做出两处改进</p>
 <ul>
 <li><strong>引进ROI(region of interest) Pooling</strong><br>将原有的金字塔池化层改良成ROI Pooling，这样做的优势既不限制输入图片大小，同时也可以反向传播。（金字塔池化层含有多个不同尺寸的区块，无法进行反向传播）<br>而ROI Pooling对卷积层后的特征图进行MaxPooling操作，接下来我们举个例子简单介绍一下。<br>假设我们需要对一个8x8feature maps执行ROI Pooling，要求输出尺寸维度为2x2。</li>
 </ul>
-
+<img src="/2018/07/15/object-detection-literature-review/input.jpg" title="8＊8 feature maps">
 <p>其次候选区域region proposal的大小为7＊5，在特征图中的(左上角、右下角)坐标是(0,3),(6,7)。如图：</p>
-
+<img src="/2018/07/15/object-detection-literature-review/roi_proposal.jpg" title="region proposal">
 <p>由于输出维度大小是2＊2，所以对候选区域进行2＊2分割</p>
-
+<img src="/2018/07/15/object-detection-literature-review/roi_pooling_section.jpg" title="pooling section">
 <p>最后对分割后的4个网格中取最大值，组成2＊2最大值输出特征图</p>
-
+<img src="/2018/07/15/object-detection-literature-review/output.jpg" title="ROI Pooling Output">
 <p>以上即是ROI Pooling对特征图的操作流程。反向传播和 MaxPooling 层的一样，只对网格里的最大值进行传播。</p>
 <ul>
 <li><strong>多任务同时训练</strong><br>其一是将R-CNN分类器SVM换成softmax，使用神经网络预测分类，减少跨平台损耗，提高预测速度。其二在预测分类、精修回归这一块改成并行任务，将分类损失和边框定位回归损失结合一起统一训练，最终输出对应分类和边框坐标。</li>
