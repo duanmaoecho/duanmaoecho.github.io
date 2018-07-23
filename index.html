@@ -700,7 +700,40 @@
       
         
           
-            
+            <h1 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h1><ul>
+<li>Ubuntu 16.04</li>
+<li>GPU GTX 1080</li>
+<li>Python 2.7.0</li>
+<li>Tensorflow 1.8.0</li>
+</ul>
+<h1 id="Objectdetection-API-环境设置"><a href="#Objectdetection-API-环境设置" class="headerlink" title="Objectdetection API 环境设置"></a>Objectdetection API 环境设置</h1><h2 id="Step-1-安装pip"><a href="#Step-1-安装pip" class="headerlink" title="Step 1 安装pip"></a>Step 1 安装pip</h2><p>打开终端Terminal<br><strong>查看pip 版本：</strong><br>    pip –version<br>提示升级的话，可以用以下命令升级：<br>    pip install –upgrade pip</p>
+<h2 id="Step-2-下载models"><a href="#Step-2-下载models" class="headerlink" title="Step 2 下载models"></a>Step 2 下载models</h2><p>从Github下载目标检测的模型文件：</p>
+<blockquote>
+<p><a href="https://github.com/tensorflow/models" target="_blank" rel="noopener">models</a></p>
+</blockquote>
+<p>我将文件存储在/home/CAPMPUS/zouy2/ObjectDetection文件路径下，解压并rename为<strong>models</strong>。其中<strong>/home/CAPMPUS/zouy2</strong>是我的系统根目录</p>
+<h2 id="Step-3-下载Protocbuf"><a href="#Step-3-下载Protocbuf" class="headerlink" title="Step 3 下载Protocbuf"></a>Step 3 下载Protocbuf</h2><p>Tensorflow Object Detection API需要使用Protobufs库配置模型和训练参数。<br>Protobufs库下载地址：</p>
+<blockquote>
+<p><a href="https://github.com/google/protobuf/releases/" target="_blank" rel="noopener">Protobuf</a></p>
+</blockquote>
+<p>选择对应版本，我的版本是<strong>protoc-3.4.0-linux-x86_64</strong><br>下载存储文件路径：/home/CAPMPUS/zouy2/ObjectDetection，解压并rename为<strong>protoc</strong></p>
+<h2 id="Step-4-配置protoc路径"><a href="#Step-4-配置protoc路径" class="headerlink" title="Step 4 配置protoc路径"></a>Step 4 配置protoc路径</h2><ul>
+<li><p>配置protoc库的文件路径（临时版）：<br>  export PATH=$PATH:/home/CAPMPUS/zouy2/ObjectDetection/protoc/bin<br>Note:<br>这是临时添加路径，只对当前终端有效.<br>如果重新打开一个新的Terminal，会发现protoc库未被编译。</p>
+</li>
+<li><p>配置protoc库的文件路径（永久版）：<br>输入命令：<br>  gedit /.bashrc #打开bashrc文件<br>在文件末尾添加文件路径：<br>export PATH=$PATH:/home/CAPMPUS/zouy2/ObjectDetection/protoc/bin<br>保存关闭以后，在终端输入以下命令激活：<br>  source /.bashrc</p>
+</li>
+<li><p>查看protoc版本，验证环境是否安装成功<br>  protoc –version</p>
+</li>
+</ul>
+<h2 id="Step-5-安装依赖库"><a href="#Step-5-安装依赖库" class="headerlink" title="Step 5 安装依赖库"></a>Step 5 安装依赖库</h2><p>Tensorflow Object Detection API依赖以下库文件<br>    sudo pip install pillow<br>    sudo pip install lxml<br>    sudo pip install jupyter<br>    sudo pip install matplotlib</p>
+<h2 id="Step-6-编译protoc"><a href="#Step-6-编译protoc" class="headerlink" title="Step 6 编译protoc"></a>Step 6 编译protoc</h2><p>在目标检测教程框架使用前，protocbuf库必须被编译，所以需要执行以下命令：<br>1、 进入models/research目录下<br>    cd /home/CAPMPUS/zouy2/ObjectDetection/models/research/<br>2、 输入以下命令<br>    protoc object_detection/protos/* .proto –python_out=.</p>
+<h2 id="Step-7-打开jupyter-notebook"><a href="#Step-7-打开jupyter-notebook" class="headerlink" title="Step 7 打开jupyter notebook"></a>Step 7 打开jupyter notebook</h2><p>使用以下命令运行模型：<br>    cd object_detection/<br>    jupyter notebook</p>
+<h2 id="Step-8-打开教程文件"><a href="#Step-8-打开教程文件" class="headerlink" title="Step 8 打开教程文件"></a>Step 8 打开教程文件</h2><p>此时Jupyter将会在浏览器里自动打开，点击文件object_detection_tutorial.ipynp<br><img src="/2018/07/12/object-detection-api/tutorial.png"></p>
+<h2 id="Step-9-运行文件"><a href="#Step-9-运行文件" class="headerlink" title="Step 9 运行文件"></a>Step 9 运行文件</h2><p>点击最上栏命令窗口Cell中的Run All，等待一会就能看到结果<br><img src="/2018/07/12/object-detection-api/run.png"></p>
+<p>输出结果像这样：<br><img src="/2018/07/12/object-detection-api/result.png"></p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>如果能看到最终检测结果，代表Object Detection API环境编译成功，就可以继续往下做其他相关的目标检测项目。</p>
+<h1 id="参考Reference"><a href="#参考Reference" class="headerlink" title="参考Reference:"></a>参考Reference:</h1><p><a href="https://ampersandacademy.com/tutorials/python-data-science/deep-learning-object-detection-model-using-tensorflow-on-mac-os-sierra" target="_blank" rel="noopener">英文版</a></p>
+
           
         
       
@@ -1700,7 +1733,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">標籤</span>
                 </a>
               </div>
